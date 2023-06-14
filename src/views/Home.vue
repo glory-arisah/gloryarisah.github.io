@@ -8,12 +8,16 @@
         v-for="artist in $store.getters.firstTenArtists"
         :key="artist.id"
       >
-        <img
-          :src="artist.image[1]['#text']"
-          :alt="artist.name"
-          class="artist__image"
-        />
-        <p>{{ artist.name }}</p>
+        <router-link
+          :to="{ name: 'Artist.show', params: { artist: artist.name } }"
+        >
+          <img
+            :src="artist.image[1]['#text']"
+            :alt="artist.name"
+            class="artist__image"
+          />
+          <p>{{ artist.name }}</p>
+        </router-link>
       </article>
     </div>
   </section>
@@ -63,36 +67,23 @@ export default {
     margin-top: 1rem;
     margin-bottom: 5.5rem;
   }
-  // heading
-  h2 {
-    margin: 0 0 1rem 2rem;
-    font: {
-      family: "Nanum Myeongjo", serif;
-      size: 1.25rem;
-      weight: 600;
-    }
-  }
 }
 .grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  text-align: center;
-  column-gap: 0.7rem;
-  row-gap: 1.3rem;
+  // all link tags
+  a {
+    text-decoration: none;
+    color: #01295f;
+    &:hover {
+      color: #7dbbc3;
+    }
+  }
   // loader
   .spinner {
-    margin-top: 1.5rem;
     grid-column: 2 / span 2;
   }
   .artist__image {
     max-width: 4.5rem;
   }
   // compact disc icon
-  .track-icon {
-    font-size: 3.2rem;
-    margin-bottom: 0.3rem;
-    cursor: pointer;
-  }
 }
 </style>

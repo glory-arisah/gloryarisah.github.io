@@ -2,7 +2,7 @@
   <div class="wrapper">
     <the-navigation />
     <main class="main">
-      <router-view></router-view>
+      <router-view :key="$route.path"></router-view>
     </main>
   </div>
 </template>

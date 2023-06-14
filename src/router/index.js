@@ -7,15 +7,23 @@ const routes = [
     name: "Home",
     component: Home,
   },
+  // route to all artists
   {
     path: "/artists",
     name: "Artists",
     component: () => import("../views/Artists.vue"),
   },
+  // route to all songs
   {
     path: "/songs",
     name: "Songs",
     component: () => import("../views/Songs.vue"),
+  },
+  // route to single artist - info
+  {
+    path: "/artists/:artist",
+    name: "Artist.show",
+    component: () => import("../views/ArtistShow.vue"),
   },
 ];
 
