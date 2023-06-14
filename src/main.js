@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import "font-awesome-animation/css/font-awesome-animation.min.css";
-import "./style.css";
+import "./style.scss";
 import router from "./router/index";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCompactDisc, faSpinner } from "@fortawesome/free-solid-svg-icons";
