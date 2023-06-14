@@ -8,6 +8,7 @@ const store = createStore({
       topTracks: [],
       currentArtist: "",
       currentAlbum: "",
+      loading: false,
     };
   },
   mutations: {
@@ -16,10 +17,17 @@ const store = createStore({
         "http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=nigeria&api_key=3491fbfc394ebf3990dfec8acd81f290&format=json",
         "http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=nigeria&api_key=3491fbfc394ebf3990dfec8acd81f290&format=json",
       ];
-      const requests = urls.map((url) => axios.get(url));
-      const [topArtists, topTracks] = await axios.all(requests);
-      state.topArtists = topArtists.data.topartists.artist;
-      state.topTracks = topTracks.data.tracks.track;
+      state.loading = true;
+      try {
+        const requests = urls.map((url) => axios.get(url));
+        const [topArtists, topTracks] = await axios.all(requests);
+        state.topArtists = topArtists.data.topartists.artist;
+        state.topTracks = topTracks.data.tracks.track;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        state.loading = false;
+      }
     },
   },
   actions: {
