@@ -3,11 +3,12 @@
     <the-loader class="loader" v-show="$store.state.loading" />
     <!-- artist bio and image -->
     <template v-if="isCurrArtist">
+      <h1>{{ currArtist.name }}</h1>
       <article class="bio" v-show="!$store.state.loading">
-        <div>
-          <img :src="currArtist['image'][2]['#text']" :alt="currArtist.name" />
+        <div class="image--container">
+          <img :src="currArtist.photoUrl" :alt="currArtist.name" />
         </div>
-        <div>
+        <div class="artist--content">
           <p v-html="currArtist.bio.summary"></p>
         </div>
       </article>
@@ -52,9 +53,24 @@ export default {
 </script>
 
 <style lang="scss">
+@mixin responsive($query) {
+  @media (min-width: $query) {
+    @content;
+  }
+}
 .artist-show--container {
   margin-top: 3.5rem;
   // top albums container
+  .bio {
+    // artist image
+    img {
+      // max-width: 252px;
+    }
+    // artist bio summary
+    p {
+      text-align: justify;
+    }
+  }
   .top-albums {
     margin-top: 3.5rem;
   }
@@ -62,20 +78,6 @@ export default {
   .loader {
     text-align: center;
     grid-column: 2 / span 2;
-  }
-  .bio {
-    display: flex;
-    align-items: flex-start;
-
-    // artist image
-    img {
-      height: fit-content;
-    }
-    // artist bio summary
-    p {
-      margin-left: 1.4rem;
-      text-align: justify;
-    }
   }
   // album icons
   .track-icon {

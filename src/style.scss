@@ -1,9 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap");
+$xl: 87.5em; // 4k desktops
+$lg: 60em; // 1080 laptops
+$md: 40em; // tablets and laptops
+$sm: 28em; //mobile and tablets
+$xs: 20em; // mobile only
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@mixin responsive($query) {
+  @media (min-width: $query) {
+    @content;
+  }
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  div.image--container {
+    margin-bottom: 1rem;
+  }
+  @include responsive($md) {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-row: autp;
+    justify-content: start;
+    div.image--container {
+      grid-column: 1 / span 4;
+    }
+    div.artist--content {
+      grid-column: 6 / -1;
+      p {
+        margin-left: 0;
+      }
+    }
+    img {
+      max-width: 100%;
+    }
+    div {
+      grid-column: 3 / -1;
+    }
+  }
+  h1 {
+    text-align: center;
+  }
 }
 
 .main {

@@ -13,8 +13,11 @@ export default {
   components: {
     TheNavigation,
   },
-  created() {
-    this.$store.dispatch("getTopArtistsAndTracks");
+  async created() {
+    await Promise.all([
+      this.$store.dispatch("getTopArtistsAndTracks"),
+      this.$store.dispatch("getArtistsPhotos"),
+    ]);
   },
 };
 </script>

@@ -12,7 +12,7 @@
           :to="{ name: 'Artist.show', params: { artist: artist.name } }"
         >
           <img
-            :src="artist.image[1]['#text']"
+            :src="artist.photoUrl"
             :alt="artist.name"
             class="artist__image"
           />
@@ -21,6 +21,7 @@
       </article>
     </div>
   </section>
+  <!-- Top Tracks -->
   <section class="dscvr dscvr-track">
     <h2>Discover Top Tracks</h2>
     <div class="grid">
@@ -80,6 +81,8 @@ export default {
   a {
     text-decoration: none;
     color: #01295f;
+    width: 6rem;
+    height: 6rem;
     &:hover {
       color: #7dbbc3;
     }
@@ -89,7 +92,9 @@ export default {
     grid-column: 2 / span 2;
   }
   .artist__image {
-    max-width: 4.5rem;
+    width: 5rem;
+    height: inherit;
+    object-fit: cover;
   }
 }
 </style>
