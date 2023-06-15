@@ -2,10 +2,10 @@
   <section class="dscvr dscvr-artist">
     <h2>Discover Top Artists</h2>
     <div class="grid">
-      <the-loader v-show="$store.state.loading" class="spinner" />
+      <the-loader v-show="loadingState" class="spinner" />
       <article
-        v-show="!$store.state.loading"
-        v-for="artist in $store.getters.firstTenArtists"
+        v-show="!loadingState"
+        v-for="artist in firstTenArtists"
         :key="artist.id"
       >
         <router-link
@@ -24,10 +24,10 @@
   <section class="dscvr dscvr-track">
     <h2>Discover Top Tracks</h2>
     <div class="grid">
-      <the-loader v-show="$store.state.loading" class="spinner" />
+      <the-loader v-show="loadingState" class="spinner" />
       <article
-        v-show="!$store.state.loading"
-        v-for="track in $store.getters.firstTenTracks"
+        v-show="!loadingState"
+        v-for="track in firstTenTracks"
         :key="track['@attr'].rank"
       >
         <font-awesome-icon
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import TheLoader from "../components/TheLoader.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 export default {
@@ -57,6 +58,12 @@ export default {
   },
   components: {
     TheLoader,
+  },
+  computed: {
+    ...mapGetters(["firstTenTracks", "firstTenArtists"]),
+    loadingState() {
+      return this.$store.state.loading;
+    },
   },
 };
 </script>
@@ -84,6 +91,5 @@ export default {
   .artist__image {
     max-width: 4.5rem;
   }
-  // compact disc icon
 }
 </style>

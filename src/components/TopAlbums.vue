@@ -3,7 +3,7 @@
     <h2>Top Albums</h2>
     <section class="grid">
       <the-loader class="loader" v-if="$store.state.loading" />
-      <template v-if="currArtist">
+      <template v-if="isCurrArtist">
         <article
           v-show="!$store.state.loading"
           v-for="album in $store.state.currArtistAlbums"
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import TheLoader from "./TheLoader.vue";
 export default {
   name: "TopAlbums",
@@ -43,6 +44,9 @@ export default {
   },
   components: {
     TheLoader,
+  },
+  computed: {
+    ...mapGetters(["isCurrArtist"]),
   },
 };
 </script>

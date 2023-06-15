@@ -1,8 +1,8 @@
 <template>
   <div class="artist-show--container">
-    <the-loader class="loader" v-if="$store.state.loading" />
+    <the-loader class="loader" v-show="$store.state.loading" />
     <!-- artist bio and image -->
-    <template v-if="currArtist">
+    <template v-if="isCurrArtist">
       <article class="bio" v-show="!$store.state.loading">
         <div>
           <img :src="currArtist['image'][2]['#text']" :alt="currArtist.name" />
@@ -38,6 +38,9 @@ export default {
   computed: {
     currArtist() {
       return this.$store.state.currentArtist;
+    },
+    isCurrArtist() {
+      return Object.keys(this.currArtist).length > 0;
     },
   },
   components: {

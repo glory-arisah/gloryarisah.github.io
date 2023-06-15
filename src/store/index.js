@@ -6,7 +6,7 @@ const store = createStore({
     return {
       topArtists: [],
       topTracks: [],
-      currentArtist: "",
+      currentArtist: {},
       currArtistAlbums: [],
       currentAlbum: "",
       loading: false,
@@ -55,7 +55,6 @@ const store = createStore({
       state.loading = true;
       try {
         const { data } = await axios.get(url);
-        console.log({ data });
         commit("getArtistInfo", { artist: data.artist });
       } catch (error) {
         console.error(error);
@@ -75,7 +74,6 @@ const store = createStore({
             (alb) => !nullValues.includes(alb.name)
           ),
         });
-        console.log("album values", state.currArtistAlbums);
       } catch (error) {
         console.error(error);
       } finally {
@@ -95,6 +93,9 @@ const store = createStore({
     // return currentArtist value
     currArtist: (state) => {
       return state.currentArtist;
+    },
+    isCurrArtist: (state) => {
+      return Object.keys(state.currentArtist).length > 0;
     },
   },
 });
